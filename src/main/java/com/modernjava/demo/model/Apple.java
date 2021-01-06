@@ -8,6 +8,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Apple {
-	private String color;
+	
+	public Apple(AppleColor color, double weightGrams) {
+		this.color = color;
+		this.weightGrams = weightGrams;
+	}
+	private AppleColor color;
 	private Double weightGrams;
 }
