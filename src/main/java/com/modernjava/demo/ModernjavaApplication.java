@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ModernjavaApplication {
 
 	public static void main(String[] args) {
+		/*Remove*/System.out.println("Hello baby!");
 		SpringApplication.run(ModernjavaApplication.class, args);
 	}
 
