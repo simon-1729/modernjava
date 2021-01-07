@@ -13,8 +13,8 @@ public class Apple {
 	private Double weight;
 
 	@Override
-    public String toString() {
-		return String.format("Apple{color='%s', weight=2%f}",
-				color, weight);
-    }
+	public String toString() {
+		return String.format("Apple{color='%s', weight=%.2f}",
+			color, weight);
+	}
 }

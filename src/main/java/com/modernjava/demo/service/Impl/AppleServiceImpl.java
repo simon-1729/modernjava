@@ -52,6 +52,7 @@ public class AppleServiceImpl implements AppleService {
 	public String filterApples(String filterType) {
 		if (filterType.equalsIgnoreCase("byColor")) {
 			return filterApplesByColor(AppleColor.GREEN);
+
 		} else if (filterType.equalsIgnoreCase("byWeight")) {
 			return filterApplesByWeight();
 		} else {
@@ -91,16 +92,23 @@ public class AppleServiceImpl implements AppleService {
 		print("Filter by Weight", result);
 		return "Apples filtered by minimum weight";
 	}
-
+	/*
+	 * Use lambdas to pass anonymous function parameter.
+	 * In this case the function acts as a predicate for
+	 * the filterApplesJ8Helper
+	 */
 	public String filterApplesJ8(String filterType) {
 		List<Apple> apples = addApples();
 
 		if (filterType.equalsIgnoreCase("byColor")) {
 			return filterApplesJ8Helper(
-					AppleServiceImpl::isGreenApple, apples);
+				(Apple a) -> AppleColor.GREEN.equals
+					(a.getColor()), apples);
+
 		} else if (filterType.equalsIgnoreCase("byWeight")) {
 			return filterApplesJ8Helper(
-					AppleServiceImpl::isHeavyApple, apples);
+				(Apple a) -> (a.getWeight() > HEAVY_APPLE),
+					apples);
 		} else {
 			return "No apples were harmed!";
 		}
@@ -124,14 +132,6 @@ public class AppleServiceImpl implements AppleService {
 
 		print("JAVA 8 FILTERING", result);
 		return "Apples have been filtered the J8 way!";
-	}
-
-	public static boolean isGreenApple(Apple apple) {
-		return AppleColor.GREEN.equals(apple.getColor());
-	}
-
-	public static boolean isHeavyApple(Apple apple) {
-		return (apple.getWeight() > HEAVY_APPLE);
 	}
 
 	/*
