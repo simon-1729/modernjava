@@ -1,84 +1,128 @@
 package com.modernjava.demo.service.Impl;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
+import com.modernjava.demo.service.AppleService;
 
 @Service
-public class AppleServiceImpl implements com.modernjava.demo.service.AppleService {
+public class AppleServiceImpl implements AppleService {
+
+	/*
+	 * This is how we use to sort apple lists.
+	 */
 	public String sortApples() {
 		List<Apple> apples = addApples();
-		apples.stream().map(Apple::getWeightGrams).forEach(System.out::println);
-		
-	//******** Sorting Apples **********************************************
-		/*
-		 * The below is the old school way! There is a better way.		
-		 */
-		
-		/*
+		print("BEFORE", apples);
+
 		Collections.sort(apples, new Comparator<Apple>() {
 			@Override
 			public int compare(Apple a1, Apple a2) {
-				return a1.getWeightGrams().compareTo(a2.getWeightGrams());				
-			}			
+				return a1.getWeight()
+					.compareTo(a2.getWeight());
+			}
 		});
-		*/
-		
-		/*
-		 * This is the way... the Java 8 way!		
-		 */
-		apples.sort(Comparator.comparing(Apple::getWeightGrams));
-		
-	//**********************************************************************
-		System.out.println("\n_______ AFTER________________");
-		apples.stream().map(Apple::getWeightGrams).forEach(System.out::println);		
-		return "The Apples have been sorted by weight";
+		print("AFTER", apples);
+		return "Apples sorted by weight";
 	}
 
-	public String filterApplesByColor(AppleColor appleColor) {		
+	/*
+	 * This is the way... this is Java 8.
+	 */
+	public String sortApplesJ8() {
+		List<Apple> apples = addApples();
+		print("BEFORE", apples);
+
+		apples.sort(Comparator.comparing(Apple::getWeight));
+
+		print("AFTER", apples);
+		return "Apples sorted by weight";
+	}
+
+	/*
+	 * The following two methods can be simplified with
+	 * the use of Java 8 Predicates. See filterApplesJ8
+	 * below.
+	 */
+	public String filterApplesByColor(AppleColor appleColor) {
 		List<Apple> apples = addApples();
 		List<Apple> result = new ArrayList<>();
-		
+
 		for(Apple apple: apples) {
-			if(appleColor.equals(apple.getColor())){
+			if(appleColor.equals(apple.getColor())) {
 				result.add(apple);
 			}
 		}
-		result.stream().map(Apple::getColor).forEach(System.out::println);
-		
-		return "The Apples have been filtered by color";
+
+		print("Filter by Color", result);
+		return "Apples filtered by color";
 	}
 
-	public String filterApplesByWeight(Double minWeight) {		
+	public String filterApplesByWeight() {
 		List<Apple> apples = addApples();
 		List<Apple> result = new ArrayList<>();
-		
+
 		for(Apple apple: apples) {
-			if(apple.getWeightGrams() > minWeight ){
+			if(apple.getWeight() > Apple.HEAVY_APPLE ) {
 				result.add(apple);
 			}
 		}
-		result.stream().map(Apple::getWeightGrams).forEach(System.out::println);
-		
-		return "The Apples have been filtered by minimum weight";
+
+		print("Filter by Weight", result);
+		return "Apples filtered by minimum weight";
 	}
-	
-	private List<Apple> addApples(){
-		
+
+	/*
+	 * Reduce the redundancy of the above two methods
+	 * with Java 8
+	 */
+	public String filterApplesJ8(Predicate<Apple> predicate) {
+		List<Apple> apples = addApples();
+		List<Apple> result = new ArrayList<>();
+
+		for(Apple apple: apples) {
+			if(predicate.test(apple)) {
+				result.add(apple);
+			}
+		}
+
+		print("JAVA 8 FILTERING", result);
+		return "Apples have been filtered the J8 way!";
+	}
+
+	/*
+	 * Toy data... how do you like them apples!
+	 */
+	private List<Apple> addApples() {
 		Apple a1 = new Apple(AppleColor.RED, 38.1 );
 		Apple a2 = new Apple(AppleColor.GREEN, 32.3);
 		Apple a3 = new Apple(AppleColor.GREEN, 36.7);
-		
+
 		List<Apple> apples = new ArrayList<>();
 		apples.add(0, a1);
 		apples.add(1, a2);
 		apples.add(2, a3);
-		
+
 		return apples;
+	}
+
+	/*
+	 * Print to console helper.
+	 */
+	private void print(String heading, List<Apple> apples) {
+		System.out.println("**** "+heading+" ****");
+		apples.stream()
+			.map(a -> new SimpleEntry<String, String>(
+				a.getColor().toString(),
+				a.getWeight().toString()))
+			.forEach(System.out::println);
 	}
 }

@@ -8,11 +8,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Apple {
-	
-	public Apple(AppleColor color, double weightGrams) {
-		this.color = color;
-		this.weightGrams = weightGrams;
-	}
+	public final static Double HEAVY_APPLE = 33.0;
+
 	private AppleColor color;
-	private Double weightGrams;
+	private Double weight;
+
+	public static boolean isGreenApple(Apple apple) {
+		return AppleColor.GREEN.equals(apple.getColor());
+	}
+
+	public static boolean isHeavyApple(Apple apple) {
+		return (apple.getWeight() > HEAVY_APPLE);
+	}
 }
