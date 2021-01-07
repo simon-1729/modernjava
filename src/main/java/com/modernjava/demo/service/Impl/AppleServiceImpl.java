@@ -97,7 +97,7 @@ public class AppleServiceImpl implements AppleService {
 	 * In this case the function acts as a predicate for
 	 * the filterApplesJ8Helper
 	 */
-	public String filterApplesJ8(String filterType) {
+	public List<Apple> filterApplesJ8(String filterType) {
 		List<Apple> apples = addApples();
 
 		if (filterType.equalsIgnoreCase("byColor")) {
@@ -110,7 +110,7 @@ public class AppleServiceImpl implements AppleService {
 				(Apple a) -> (a.getWeight() > HEAVY_APPLE),
 					apples);
 		} else {
-			return "No apples were harmed!";
+			return apples;//Original list of apples!
 		}
 	}
 
@@ -119,8 +119,8 @@ public class AppleServiceImpl implements AppleService {
 	 * filterApplesByWeight with the following...
 	 * the Java 8 way.
 	 */
-	private String filterApplesJ8Helper(Predicate<Apple> predicate,
-			List<Apple> apples) {
+	private List<Apple> filterApplesJ8Helper(
+		Predicate<Apple> predicate, List<Apple> apples) {
 
 		List<Apple> result = new ArrayList<>();
 
@@ -131,7 +131,7 @@ public class AppleServiceImpl implements AppleService {
 		}
 
 		print("JAVA 8 FILTERING", result);
-		return "Apples have been filtered the J8 way!";
+		return result;
 	}
 
 	/*

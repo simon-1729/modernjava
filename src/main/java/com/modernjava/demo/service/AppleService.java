@@ -1,5 +1,9 @@
 package com.modernjava.demo.service;
 
+import java.util.List;
+
+import com.modernjava.demo.model.Apple;
+
 public interface AppleService {
 	/*
 	 * Old school java.
@@ -19,5 +23,5 @@ public interface AppleService {
 	/*
 	 * The Java 8 way.
 	 */
-	public String filterApplesJ8(String filterType);
+	public List<Apple> filterApplesJ8(String filterType);
 }
