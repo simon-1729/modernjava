@@ -16,6 +16,8 @@ import com.modernjava.demo.service.AppleService;
 @Service
 public class AppleServiceImpl implements AppleService {
 
+	public final static Double HEAVY_APPLE = 33.0;
+
 	/*
 	 * This is how we use to sort apple lists.
 	 */
@@ -47,12 +49,22 @@ public class AppleServiceImpl implements AppleService {
 		return "Apples sorted by weight";
 	}
 
+	public String filterApples(String filterType) {
+		if (filterType.equalsIgnoreCase("byColor")) {
+			return filterApplesByColor(AppleColor.GREEN);
+		} else if (filterType.equalsIgnoreCase("byWeight")) {
+			return filterApplesByWeight();
+		} else {
+			return "No apples were harmed!";
+		}
+	}
+
 	/*
 	 * The following two methods can be simplified with
-	 * the use of Java 8 Predicates. See filterApplesJ8
+	 * the use of Java 8 Predicates. See filterApplesJ8Helper
 	 * below.
 	 */
-	public String filterApplesByColor(AppleColor appleColor) {
+	private String filterApplesByColor(AppleColor appleColor) {
 		List<Apple> apples = addApples();
 		List<Apple> result = new ArrayList<>();
 
@@ -66,12 +78,12 @@ public class AppleServiceImpl implements AppleService {
 		return "Apples filtered by color";
 	}
 
-	public String filterApplesByWeight() {
+	private String filterApplesByWeight() {
 		List<Apple> apples = addApples();
 		List<Apple> result = new ArrayList<>();
 
 		for(Apple apple: apples) {
-			if(apple.getWeight() > Apple.HEAVY_APPLE ) {
+			if(apple.getWeight() > HEAVY_APPLE ) {
 				result.add(apple);
 			}
 		}
@@ -80,12 +92,28 @@ public class AppleServiceImpl implements AppleService {
 		return "Apples filtered by minimum weight";
 	}
 
-	/*
-	 * Reduce the redundancy of the above two methods
-	 * with Java 8
-	 */
-	public String filterApplesJ8(Predicate<Apple> predicate) {
+	public String filterApplesJ8(String filterType) {
 		List<Apple> apples = addApples();
+
+		if (filterType.equalsIgnoreCase("byColor")) {
+			return filterApplesJ8Helper(
+					AppleServiceImpl::isGreenApple, apples);
+		} else if (filterType.equalsIgnoreCase("byWeight")) {
+			return filterApplesJ8Helper(
+					AppleServiceImpl::isHeavyApple, apples);
+		} else {
+			return "No apples were harmed!";
+		}
+	}
+
+	/*
+	 * Reduce the redundancy from filterApplesByColor and
+	 * filterApplesByWeight with the following...
+	 * the Java 8 way.
+	 */
+	private String filterApplesJ8Helper(Predicate<Apple> predicate,
+			List<Apple> apples) {
+
 		List<Apple> result = new ArrayList<>();
 
 		for(Apple apple: apples) {
@@ -96,6 +124,14 @@ public class AppleServiceImpl implements AppleService {
 
 		print("JAVA 8 FILTERING", result);
 		return "Apples have been filtered the J8 way!";
+	}
+
+	public static boolean isGreenApple(Apple apple) {
+		return AppleColor.GREEN.equals(apple.getColor());
+	}
+
+	public static boolean isHeavyApple(Apple apple) {
+		return (apple.getWeight() > HEAVY_APPLE);
 	}
 
 	/*
@@ -118,7 +154,7 @@ public class AppleServiceImpl implements AppleService {
 		
 		apples.stream()
 			.map(Apple::toString)
-		.forEach(System.out::println);
+			.forEach(System.out::println);
 
 	}
 }

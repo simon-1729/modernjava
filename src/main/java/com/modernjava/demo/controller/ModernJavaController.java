@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.modernjava.demo.model.Apple;
-import com.modernjava.demo.model.AppleColor;
 import com.modernjava.demo.service.AppleService;
 
 @RestController
@@ -32,16 +30,7 @@ public class ModernJavaController {
 
 	@GetMapping(path = "/filtered/{filterType}")
 	public String filtered(@PathVariable String filterType) {
-
-		if (filterType.equalsIgnoreCase("byColor")) {
-			return appleService
-					.filterApplesByColor(AppleColor.GREEN);
-		} else if (filterType.equalsIgnoreCase("byWeight")) {
-			return appleService
-					.filterApplesByWeight();
-		} else {
-			return "Nothing to see here!";
-		}
+		return appleService.filterApples(filterType);
 	}
 
 	/*
@@ -49,15 +38,6 @@ public class ModernJavaController {
 	 */
 	@GetMapping(path = "/filteredJ8/{filterType}")
 	public String filteredJ8(@PathVariable String filterType) {
-
-		if (filterType.equalsIgnoreCase("byColor")) {
-			return appleService
-					.filterApplesJ8(Apple::isGreenApple);
-		} else if (filterType.equalsIgnoreCase("byWeight")) {
-			return appleService
-					.filterApplesJ8(Apple::isHeavyApple);
-		} else {
-			return "No filtering to see here!";
-		}
+		return appleService.filterApplesJ8(filterType);
 	}
 }

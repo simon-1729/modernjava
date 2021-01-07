@@ -1,17 +1,15 @@
 package com.modernjava.demo.service;
 
-import java.util.function.Predicate;
-
-import com.modernjava.demo.model.Apple;
-import com.modernjava.demo.model.AppleColor;
-
 public interface AppleService {
-
+	/*
+	 * Old school java.
+	 */
 	public String sortApples();
 
-	public String filterApplesByColor(AppleColor appleColor);
-
-	public String filterApplesByWeight();
+	/*
+	 * Old school java.
+	 */
+	public String filterApples(String filterType);
 
 	/*
 	 * The Java 8 way.
@@ -21,5 +19,5 @@ public interface AppleService {
 	/*
 	 * The Java 8 way.
 	 */
-	public String filterApplesJ8(Predicate<Apple> predicate);
+	public String filterApplesJ8(String filterType);
 }

@@ -8,21 +8,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Apple {
-	public final static Double HEAVY_APPLE = 33.0;
 
 	private AppleColor color;
 	private Double weight;
 
-	public static boolean isGreenApple(Apple apple) {
-		return AppleColor.GREEN.equals(apple.getColor());
-	}
-
-	public static boolean isHeavyApple(Apple apple) {
-		return (apple.getWeight() > HEAVY_APPLE);
-	}
-
 	@Override
     public String toString() {
-      return String.format("Apple{color='%s', weight=2%f}", color, weight);
+		return String.format("Apple{color='%s', weight=2%f}",
+				color, weight);
     }
 }
