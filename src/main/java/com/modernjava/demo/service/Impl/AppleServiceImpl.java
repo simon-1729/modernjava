@@ -1,7 +1,7 @@
 package com.modernjava.demo.service.Impl;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -102,15 +102,11 @@ public class AppleServiceImpl implements AppleService {
 	 * Toy data... how do you like them apples!
 	 */
 	private List<Apple> addApples() {
-		Apple a1 = new Apple(AppleColor.RED, 38.1 );
-		Apple a2 = new Apple(AppleColor.GREEN, 32.3);
-		Apple a3 = new Apple(AppleColor.GREEN, 36.7);
-
-		List<Apple> apples = new ArrayList<>();
-		apples.add(0, a1);
-		apples.add(1, a2);
-		apples.add(2, a3);
-
+		List<Apple> apples = Arrays.asList(
+			new Apple(AppleColor.RED, 38.1 ),
+			new Apple(AppleColor.GREEN, 32.3),
+			new Apple(AppleColor.GREEN, 36.7)
+		);
 		return apples;
 	}
 
@@ -119,10 +115,10 @@ public class AppleServiceImpl implements AppleService {
 	 */
 	private void print(String heading, List<Apple> apples) {
 		System.out.println("**** "+heading+" ****");
+		
 		apples.stream()
-			.map(a -> new SimpleEntry<String, String>(
-				a.getColor().toString(),
-				a.getWeight().toString()))
-			.forEach(System.out::println);
+			.map(Apple::toString)
+		.forEach(System.out::println);
+
 	}
 }

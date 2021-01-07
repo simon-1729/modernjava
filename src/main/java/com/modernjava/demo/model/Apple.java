@@ -20,4 +20,9 @@ public class Apple {
 	public static boolean isHeavyApple(Apple apple) {
 		return (apple.getWeight() > HEAVY_APPLE);
 	}
+
+	@Override
+    public String toString() {
+      return String.format("Apple{color='%s', weight=2%f}", color, weight);
+    }
 }
