@@ -5,20 +5,21 @@ import java.util.List;
 import com.modernjava.demo.model.Apple;
 
 public interface AppleService {
+	public final static Double HEAVY_APPLE = 33.0;
 	/*
 	 * Old school java.
 	 */
-	public String sortApples();
+	public List<Apple> sortApples();
 
 	/*
 	 * Old school java.
 	 */
-	public String filterApples(String filterType);
+	public List<Apple> filterApples(String filterType);
 
 	/*
 	 * The Java 8 way.
 	 */
-	public String sortApplesJ8();
+	public List<Apple> sortApplesJ8();
 
 	/*
 	 * The Java 8 way.

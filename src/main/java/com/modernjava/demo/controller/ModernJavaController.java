@@ -20,21 +20,26 @@ public class ModernJavaController {
 	private AppleService appleService;
 
 	@GetMapping(path = "/sorted")
-	public String sorted() {
-		return appleService.sortApples();
+	public ResponseEntity<List<Apple>> sorted() {
+		return ResponseEntity.status(200)
+			.body(appleService.sortApples());
 	}
 
 	/*
 	 * Sorting the Java 8 way.
 	 */
 	@GetMapping(path = "/sortedJ8")
-	public String sortedJ8() {
-		return appleService.sortApplesJ8();
+	public ResponseEntity<List<Apple>> sortedJ8() {
+		return ResponseEntity.status(200)
+			.body(appleService.sortApplesJ8());
 	}
 
 	@GetMapping(path = "/filtered/{filterType}")
-	public String filtered(@PathVariable String filterType) {
-		return appleService.filterApples(filterType);
+	public ResponseEntity<List<Apple>> filtered(@PathVariable
+		String filterType) {
+
+		return ResponseEntity.status(200)
+				.body(appleService.filterApples(filterType));
 	}
 
 	/*
