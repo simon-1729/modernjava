@@ -19,7 +19,7 @@ import com.modernjava.demo.model.AppleColor;
 public class AppleServiceImpl implements AppleService {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(ModernJavaController.class);
+			.getLogger(AppleServiceImpl.class);
 	/*
 	 * This is how we use to sort apple lists.
 	 */
