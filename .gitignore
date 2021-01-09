@@ -1,5 +1,6 @@
 tmp
 HELP.md
+**/logs/
 target/
 .mvn/
 !.mvn/wrapper/maven-wrapper.jar

@@ -5,7 +5,7 @@ import java.util.List;
 import com.modernjava.demo.model.Apple;
 
 public interface AppleService {
-	public final static Double HEAVY_APPLE = 33.0;
+	public static final Double HEAVY_APPLE = 33.0;
 	/*
 	 * Old school java.
 	 */

@@ -1,4 +1,4 @@
-package com.modernjava.demo.service.Impl;
+package com.modernjava.demo.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,20 +7,26 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.modernjava.demo.controller.ModernJavaController;
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
-import com.modernjava.demo.service.AppleService;
 
 @Service
 public class AppleServiceImpl implements AppleService {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(ModernJavaController.class);
 	/*
 	 * This is how we use to sort apple lists.
 	 */
 	public List<Apple> sortApples() {
 		List<Apple> apples = addApples();
-		print("BEFORE", apples);
+
+		logger.info("BEFORE: {}", apples);
 
 		Collections.sort(apples, new Comparator<Apple>() {
 			@Override
@@ -29,7 +35,7 @@ public class AppleServiceImpl implements AppleService {
 					.compareTo(a2.getWeight());
 			}
 		});
-		print("AFTER", apples);
+		logger.info("AFTER: {}", apples);
 		return apples;
 	}
 
@@ -38,11 +44,11 @@ public class AppleServiceImpl implements AppleService {
 	 */
 	public List<Apple> sortApplesJ8() {
 		List<Apple> apples = addApples();
-		print("BEFORE", apples);
+		logger.info("BEFORE: {}", apples);
 
 		apples.sort(Comparator.comparing(Apple::getWeight));
 
-		print("AFTER", apples);
+		logger.info("AFTER: {}", apples);
 		return apples;
 	}
 
@@ -53,7 +59,7 @@ public class AppleServiceImpl implements AppleService {
 		} else if (filterType.equalsIgnoreCase("byWeight")) {
 			return filterApplesByWeight();
 		} else {
-			return new ArrayList<Apple>();
+			return new ArrayList<>();
 		}
 	}
 
@@ -71,8 +77,7 @@ public class AppleServiceImpl implements AppleService {
 				result.add(apple);
 			}
 		}
-
-		print("Filter by Color", result);
+		logger.info("Filter out red apples: {}", result);
 		return result;
 	}
 
@@ -85,8 +90,7 @@ public class AppleServiceImpl implements AppleService {
 				result.add(apple);
 			}
 		}
-
-		print("Filter by Weight", result);
+		logger.info("Filter out heavy apples: {}", result);
 		return result;
 	}
 	/*
@@ -107,7 +111,7 @@ public class AppleServiceImpl implements AppleService {
 				(Apple a) -> (HEAVY_APPLE > a.getWeight()),
 					apples);
 		} else {
-			return new ArrayList<Apple>();
+			return new ArrayList<>();
 		}
 	}
 
@@ -126,8 +130,7 @@ public class AppleServiceImpl implements AppleService {
 				result.add(apple);
 			}
 		}
-
-		print("JAVA 8 FILTERING", result);
+		logger.info("JAVA 8 FILTERING: {}", result);
 		return result;
 	}
 
@@ -135,23 +138,10 @@ public class AppleServiceImpl implements AppleService {
 	 * Toy data... how do you like them apples!
 	 */
 	private List<Apple> addApples() {
-		List<Apple> apples = Arrays.asList(
+		return Arrays.asList(
 			new Apple(AppleColor.RED, 38.1),
 			new Apple(AppleColor.GREEN, 32.3),
 			new Apple(AppleColor.GREEN, 36.7)
 		);
-		return apples;
-	}
-
-	/*
-	 * Print to console helper.
-	 */
-	private void print(String heading, List<Apple> apples) {
-		System.out.println("**** "+heading+" ****");
-		
-		apples.stream()
-			.map(Apple::toString)
-			.forEach(System.out::println);
-
 	}
 }

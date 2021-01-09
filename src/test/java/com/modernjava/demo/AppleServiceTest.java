@@ -14,11 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
 import com.modernjava.demo.service.AppleService;
-import com.modernjava.demo.service.Impl.AppleServiceImpl;
+import com.modernjava.demo.service.AppleServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppleServiceImpl.class)
-public class AppleServiceTest {
+class AppleServiceTest {
 	private final String BY_WEIGHT = "byWeight";
 	private final String BY_COLOR = "byColor";
 
@@ -26,7 +26,7 @@ public class AppleServiceTest {
 	private AppleService appleService;
 
 	@Test
-	public void testSortApples_expectOrderedByWeight() {
+	void testSortApples_expectOrderedByWeight() {
 		List<Apple> resultOrdered = appleService.sortApples();
 
 		Boolean ordered = true;
@@ -42,7 +42,7 @@ public class AppleServiceTest {
 	}
 
 	@Test
-	public void testSortApplesJ8_expectOrderedByWeight() {
+	void testSortApplesJ8_expectOrderedByWeight() {
 		List<Apple> resultOrdered = appleService.sortApplesJ8();
 
 		Boolean ordered = true;
@@ -58,7 +58,7 @@ public class AppleServiceTest {
 	}
 
 	@Test
-	public void testFilterApples_expectNoRedApples() {
+	void testFilterApples_expectNoRedApples() {
 		List<Apple> resultByColor = appleService
 				.filterApples(BY_COLOR);
 
@@ -70,11 +70,11 @@ public class AppleServiceTest {
 				break;
 			}
 		}
-		assertThat(redAppleExists).isEqualTo(false);
+		assertThat(redAppleExists).isFalse();
 	}
 
 	@Test
-	public void testFilterApples_expectNoHeavyApples() {
+	void testFilterApples_expectNoHeavyApples() {
 		List<Apple> resultByWeight = appleService
 				.filterApples(BY_WEIGHT);
 
@@ -91,7 +91,7 @@ public class AppleServiceTest {
 	}
 
 	@Test
-	public void testFilterApplesJ8_expectNoRedApples() {
+	void testFilterApplesJ8_expectNoRedApples() {
 		List<Apple> resultByColor = appleService
 			.filterApplesJ8(BY_COLOR);
 
@@ -103,11 +103,11 @@ public class AppleServiceTest {
 				break;
 			}
 		}
-		assertThat(redAppleExists).isEqualTo(false);
+		assertThat(redAppleExists).isFalse();
 	}
 
 	@Test
-	public void testFilterApplesJ8Test_expectNoHeavyApples() {
+	void testFilterApplesJ8Test_expectNoHeavyApples() {
 		List<Apple> resultByWeight = appleService
 				.filterApplesJ8(BY_WEIGHT);
 
