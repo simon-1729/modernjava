@@ -1,4 +1,4 @@
-package com.modernjava.demo;
+package com.modernjava.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
