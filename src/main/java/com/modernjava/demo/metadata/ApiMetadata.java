@@ -10,4 +10,8 @@ public class ApiMetadata {
 	public static final String FUNCTIONAL_JAVA = ", uses functional java";
 
 	public static final String LEGACY_JAVA = ", uses legacy java";
+
+	private ApiMetadata() {
+		throw new IllegalStateException("Utility class");
+	}
 }
