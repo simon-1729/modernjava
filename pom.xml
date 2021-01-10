@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<swagger.version>2.4.0</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -48,7 +49,16 @@
 			<artifactId>sonar-maven-plugin</artifactId>
 			<version>3.7.0.1746</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>

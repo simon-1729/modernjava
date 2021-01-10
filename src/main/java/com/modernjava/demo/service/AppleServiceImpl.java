@@ -138,9 +138,9 @@ public class AppleServiceImpl implements AppleService {
 	 */
 	private List<Apple> addApples() {
 		return Arrays.asList(
-			new Apple(AppleColor.RED, 38.1),
-			new Apple(AppleColor.GREEN, 32.3),
-			new Apple(AppleColor.GREEN, 36.7)
+			new Apple(AppleColor.GREEN, 188.1),
+			new Apple(AppleColor.GREEN, 132.3),
+			new Apple(AppleColor.RED, 156.7)
 		);
 	}
 }

@@ -9,3 +9,8 @@ which can be use to trigger various different sorting and filtering behaviour on
 ```bash
 mvn spring-boot:run
 ```
+
+#### Swagger API
+```bash
+http://localhost:8888/swagger-ui.html
+```

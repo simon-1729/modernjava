@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
-import com.modernjava.demo.service.AppleService;
-import com.modernjava.demo.service.AppleServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppleServiceImpl.class)
