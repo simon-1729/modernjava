@@ -1,6 +1,6 @@
 package com.modernjava.demo.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -25,100 +25,74 @@ class AppleServiceTest {
 
 	@Test
 	void testSortApples_expectOrderedByWeight() {
-		List<Apple> resultOrdered = appleService.sortApples();
+		List<Apple> expectOrderByWeight = appleService.sortApples();
 
-		Boolean ordered = true;
-
-		for(int i=0; i<resultOrdered.size()-1; i++) {
-			if(resultOrdered.get(i).getWeight()
-				> resultOrdered.get(i+1).getWeight()) {
-					ordered = false;
-					break;
-			}
-		}
-		assertTrue("Apples not in assending order!", ordered);
+		assertTrue("Apples not ordered by Weight",
+			isOrderedByWeight(expectOrderByWeight));
 	}
 
 	@Test
 	void testSortApplesJ8_expectOrderedByWeight() {
-		List<Apple> resultOrdered = appleService.sortApplesJ8();
+		List<Apple> expectOrderByWeight = appleService.sortApplesJ8();
 
-		Boolean ordered = true;
-
-		for(int i=0; i<resultOrdered.size()-1; i++) {
-			if(resultOrdered.get(i).getWeight()
-				> resultOrdered.get(i+1).getWeight()) {
-					ordered = false;
-					break;
-			}
-		}
-		assertTrue("Apples not in assending order!", ordered);
+		assertTrue("Apples not ordered by Weight",
+			isOrderedByWeight(expectOrderByWeight));
 	}
 
 	@Test
 	void testFilterApples_expectNoRedApples() {
-		List<Apple> resultByColor = appleService
-				.filterApples(BY_COLOR);
+		List<Apple> expectNoRedApples = appleService
+			.filterApples(BY_COLOR);
 
-		Boolean redAppleExists = false;
+		Boolean redAppleExists = expectNoRedApples.stream()
+			.anyMatch(a -> a.getColor().equals(AppleColor.RED));
 
-		for( Apple apple: resultByColor) {
-			if(apple.getColor().equals(AppleColor.RED)) {
-				redAppleExists = true;
-				break;
-			}
-		}
-		assertThat(redAppleExists).isFalse();
-	}
-
-	@Test
-	void testFilterApples_expectNoHeavyApples() {
-		List<Apple> resultByWeight = appleService
-				.filterApples(BY_WEIGHT);
-
-		Double badApple = 0d;
-
-		for( Apple apple: resultByWeight) {
-			if(apple.getWeight() > AppleService.HEAVY_APPLE) {
-				badApple = apple.getWeight();
-				break;
-			}
-		}
-		assertTrue(badApple+" is too heavy!",
-			badApple < AppleService.HEAVY_APPLE);
+		assertFalse("Fail on red apple", redAppleExists);
 	}
 
 	@Test
 	void testFilterApplesJ8_expectNoRedApples() {
-		List<Apple> resultByColor = appleService
+		List<Apple> expectNoRedApples = appleService
 			.filterApplesJ8(BY_COLOR);
 
-		Boolean redAppleExists = false;
+		Boolean redAppleExists = expectNoRedApples.stream()
+			.anyMatch(a -> a.getColor().equals(AppleColor.RED));
 
-		for( Apple apple: resultByColor) {
-			if(apple.getColor().equals(AppleColor.RED)) {
-				redAppleExists = true;
-				break;
-			}
-		}
-		assertThat(redAppleExists).isFalse();
+		assertFalse("Fail on red apple", redAppleExists);
 	}
 
 	@Test
-	void testFilterApplesJ8Test_expectNoHeavyApples() {
-		List<Apple> resultByWeight = appleService
-				.filterApplesJ8(BY_WEIGHT);
+	void testFilterApples_expectNoHeavyApples() {
+		List<Apple> expectNoHeavyApples = appleService
+			.filterApples(BY_WEIGHT);
 
-			Double badApple = 0d;
+		Boolean heavyAppleExists = expectNoHeavyApples.stream()
+			.anyMatch(a -> a.getWeight() > AppleService.HEAVY_APPLE);
 
-			for( Apple apple: resultByWeight) {
-				if(apple.getWeight() > AppleService.HEAVY_APPLE) {
-					badApple = apple.getWeight();
+		assertFalse("Fail on heavy apples", heavyAppleExists);
+	}
+
+	@Test
+	void testFilterApplesJ8_expectNoHeavyApples() {
+		List<Apple> expectNoHeavyApples = appleService
+			.filterApplesJ8(BY_WEIGHT);
+
+		Boolean heavyAppleExists = expectNoHeavyApples.stream()
+			.anyMatch(a -> a.getWeight() > AppleService.HEAVY_APPLE);
+
+		assertFalse("Fail on heavy apples", heavyAppleExists);
+	}
+
+	private Boolean isOrderedByWeight(List<Apple> apples) {
+		Boolean isOrdered = true;
+		for(int i=0; i<apples.size()-1; i++) {
+			if(apples.get(i).getWeight()
+				> apples.get(i+1).getWeight()) {
+					isOrdered = false;
 					break;
-				}
 			}
-			assertTrue(badApple+" is too heavy!",
-				badApple < AppleService.HEAVY_APPLE);
+		}
+		return isOrdered;
 	}
 
 }

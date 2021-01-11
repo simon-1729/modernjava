@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,11 +105,14 @@ public class AppleServiceImpl implements AppleService {
 			return filterApplesJ8Helper(
 				(Apple a) -> AppleColor.GREEN.equals
 					(a.getColor()), apples);
-
+		/*
+		 * An even better alternative is to use the Streams API and
+		 * dispense with the need for any additional helper methods.
+		 */
 		} else if (filterType.equalsIgnoreCase("byWeight")) {
-			return filterApplesJ8Helper(
-				(Apple a) -> (HEAVY_APPLE > a.getWeight()),
-					apples);
+			return apples.stream()
+				.filter(a -> a.getWeight() < HEAVY_APPLE)
+				.collect(Collectors.toList());
 		} else {
 			return new ArrayList<>();
 		}
