@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.modernjava.demo.model.Apple;
 
-public interface AppleService {
+public interface AppleServiceLegacy {
 	public static final Double HEAVY_APPLE = 182.0;
 	/*
 	 * Old school java.

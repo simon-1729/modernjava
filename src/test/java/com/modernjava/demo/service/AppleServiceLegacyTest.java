@@ -13,21 +13,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
+import com.modernjava.demo.service.impl.AppleServiceLegacyImpl;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppleServiceImpl.class)
-class AppleServiceTest {
+@SpringBootTest(classes = AppleServiceLegacyImpl.class)
+class AppleServiceLegacyTest {
 	private final String BY_WEIGHT = "byWeight";
 	private final String BY_COLOR = "byColor";
 
 	@Autowired
-	private AppleService appleService;
+	private AppleServiceLegacy appleService;
 
 	@Test
 	void testSortApples_expectOrderedByWeight() {
 		List<Apple> expectOrderByWeight = appleService.sortApples();
 
-		assertTrue("Apples not ordered by Weight",
+		assertTrue("Fail on apples not ordered by Weight",
 			isOrderedByWeight(expectOrderByWeight));
 	}
 
@@ -35,7 +36,7 @@ class AppleServiceTest {
 	void testSortApplesJ8_expectOrderedByWeight() {
 		List<Apple> expectOrderByWeight = appleService.sortApplesJ8();
 
-		assertTrue("Apples not ordered by Weight",
+		assertTrue("Fail on apples not ordered by Weight",
 			isOrderedByWeight(expectOrderByWeight));
 	}
 
@@ -47,7 +48,7 @@ class AppleServiceTest {
 		Boolean redAppleExists = expectNoRedApples.stream()
 			.anyMatch(a -> a.getColor().equals(AppleColor.RED));
 
-		assertFalse("Fail on red apple", redAppleExists);
+		assertFalse("Fail on red apple exists", redAppleExists);
 	}
 
 	@Test
@@ -58,7 +59,7 @@ class AppleServiceTest {
 		Boolean redAppleExists = expectNoRedApples.stream()
 			.anyMatch(a -> a.getColor().equals(AppleColor.RED));
 
-		assertFalse("Fail on red apple", redAppleExists);
+		assertFalse("Fail on red apple exists", redAppleExists);
 	}
 
 	@Test
@@ -67,9 +68,9 @@ class AppleServiceTest {
 			.filterApples(BY_WEIGHT);
 
 		Boolean heavyAppleExists = expectNoHeavyApples.stream()
-			.anyMatch(a -> a.getWeight() > AppleService.HEAVY_APPLE);
+			.anyMatch(a -> a.getWeight() > AppleServiceLegacy.HEAVY_APPLE);
 
-		assertFalse("Fail on heavy apples", heavyAppleExists);
+		assertFalse("Fail on heavy apples exists", heavyAppleExists);
 	}
 
 	@Test
@@ -78,9 +79,9 @@ class AppleServiceTest {
 			.filterApplesJ8(BY_WEIGHT);
 
 		Boolean heavyAppleExists = expectNoHeavyApples.stream()
-			.anyMatch(a -> a.getWeight() > AppleService.HEAVY_APPLE);
+			.anyMatch(a -> a.getWeight() > AppleServiceLegacy.HEAVY_APPLE);
 
-		assertFalse("Fail on heavy apples", heavyAppleExists);
+		assertFalse("Fail on heavy apples exists", heavyAppleExists);
 	}
 
 	private Boolean isOrderedByWeight(List<Apple> apples) {
