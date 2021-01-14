@@ -65,11 +65,6 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 		logger.info("Added {} filters", filters.size());
 	}
 
-	private Function<List<Apple>, List<Apple>>
-		getFilter(AppleFilterType filterType) {
-			return filters.get(filterType);
-	}
-
 	/*
 	 * Toy data... how do you like them apples!
 	 */
@@ -87,6 +82,6 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 	 */
 	public List<Apple> 
 		filterApplesWithModernJava(AppleFilterType filterType) {
-			return getFilter(filterType).apply(addApples());
+			return filters.get(filterType).apply(addApples());
 	}
 }
