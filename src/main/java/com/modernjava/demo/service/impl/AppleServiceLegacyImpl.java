@@ -1,5 +1,7 @@
 package com.modernjava.demo.service.impl;
 
+import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

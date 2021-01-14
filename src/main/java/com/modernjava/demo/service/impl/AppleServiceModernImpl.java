@@ -3,7 +3,7 @@ package com.modernjava.demo.service.impl;
 import static com.modernjava.demo.model.AppleFilterType.BYCOLOR;
 import static com.modernjava.demo.model.AppleFilterType.BYWEIGHT;
 import static com.modernjava.demo.model.AppleFilterType.SORT;
-import static com.modernjava.demo.service.AppleServiceLegacy.HEAVY_APPLE;
+import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
 
 import java.util.Arrays;
 import java.util.Comparator;

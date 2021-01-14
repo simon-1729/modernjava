@@ -1,5 +1,6 @@
 package com.modernjava.demo.service;
 
+import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -68,7 +69,7 @@ class AppleServiceLegacyTest {
 			.filterApples(BY_WEIGHT);
 
 		Boolean heavyAppleExists = expectNoHeavyApples.stream()
-			.anyMatch(a -> a.getWeight() > AppleServiceLegacy.HEAVY_APPLE);
+			.anyMatch(a -> a.getWeight() > HEAVY_APPLE);
 
 		assertFalse("Fail on heavy apples exists", heavyAppleExists);
 	}
@@ -79,7 +80,7 @@ class AppleServiceLegacyTest {
 			.filterApplesJ8(BY_WEIGHT);
 
 		Boolean heavyAppleExists = expectNoHeavyApples.stream()
-			.anyMatch(a -> a.getWeight() > AppleServiceLegacy.HEAVY_APPLE);
+			.anyMatch(a -> a.getWeight() > HEAVY_APPLE);
 
 		assertFalse("Fail on heavy apples exists", heavyAppleExists);
 	}

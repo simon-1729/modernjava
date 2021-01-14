@@ -9,6 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Apple {
 
+	public static final Double HEAVY_APPLE = 182.0;
+
 	private AppleColor color;
 	private Double weight;
 
