@@ -1,4 +1,6 @@
-package com.modernjava.demo.service;
+package com.modernjava.demo.service.impl;
+
+import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,14 +16,18 @@ import org.springframework.stereotype.Service;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
+import com.modernjava.demo.service.AppleServiceLegacy;
 
 @Service
-public class AppleServiceImpl implements AppleService {
+public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(AppleServiceImpl.class);
+		.getLogger(AppleServiceLegacyImpl.class);
+
+
 	/*
-	 * This is how we use to sort apple lists.
+	 * Old school java, using an anonymous class to
+	 * sort them apples.
 	 */
 	public List<Apple> sortApples() {
 		List<Apple> apples = addApples();
@@ -40,7 +46,7 @@ public class AppleServiceImpl implements AppleService {
 	}
 
 	/*
-	 * This is the way... this is Java 8.
+	 * From Java 8 List comes with a sort method.
 	 */
 	public List<Apple> sortApplesJ8() {
 		List<Apple> apples = addApples();
@@ -93,6 +99,7 @@ public class AppleServiceImpl implements AppleService {
 		logger.info("Filter out heavy apples: {}", result);
 		return result;
 	}
+
 	/*
 	 * Use lambdas to pass anonymous function parameter.
 	 * In this case the function acts as a predicate for
@@ -111,8 +118,8 @@ public class AppleServiceImpl implements AppleService {
 		 */
 		} else if (filterType.equalsIgnoreCase("byWeight")) {
 			return apples.stream()
-				.filter(a -> a.getWeight() < HEAVY_APPLE)
-				.collect(Collectors.toList());
+					.filter(a -> a.getWeight() < HEAVY_APPLE)
+					.collect(Collectors.toList());
 		} else {
 			return new ArrayList<>();
 		}
@@ -123,14 +130,14 @@ public class AppleServiceImpl implements AppleService {
 	 * filterApplesByWeight with the following...
 	 * the Java 8 way.
 	 */
-	private List<Apple> filterApplesJ8Helper(
-		Predicate<Apple> predicate, List<Apple> apples) {
+	private <T> List<T> filterApplesJ8Helper(
+		Predicate<T> predicate, List<T> list) {
 
-		List<Apple> result = new ArrayList<>();
+		List<T> result = new ArrayList<>();
 
-		for(Apple apple: apples) {
-			if(predicate.test(apple)) {
-				result.add(apple);
+		for(T t: list) {
+			if(predicate.test(t)) {
+				result.add(t);
 			}
 		}
 		logger.info("JAVA 8 FILTERING: {}", result);
@@ -140,7 +147,7 @@ public class AppleServiceImpl implements AppleService {
 	/*
 	 * Toy data... how do you like them apples!
 	 */
-	private List<Apple> addApples() {
+	private static List<Apple> addApples() {
 		return Arrays.asList(
 			new Apple(AppleColor.GREEN, 188.1),
 			new Apple(AppleColor.GREEN, 132.3),

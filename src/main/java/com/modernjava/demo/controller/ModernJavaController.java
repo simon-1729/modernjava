@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.modernjava.demo.metadata.ApiMetadata;
 import com.modernjava.demo.model.Apple;
-import com.modernjava.demo.service.AppleService;
+import com.modernjava.demo.model.AppleFilterType;
+import com.modernjava.demo.service.AppleServiceModern;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -20,49 +20,17 @@ import io.swagger.annotations.ApiOperation;
 public class ModernJavaController {
 
 	@Autowired
-	private AppleService appleService;
+	private AppleServiceModern appleService;
 
-	@ApiOperation(value = "",
-		notes = ApiMetadata.SORTED_NOTES+ApiMetadata.LEGACY_JAVA,
-		response = ResponseEntity.class,
+	@ApiOperation(value = "Sort, or filter by color or weight",
+		notes ="", 	response = ResponseEntity.class,
 		responseContainer = "List", tags = {})
-	@GetMapping(path = "/sorted")
-	public ResponseEntity<List<Apple>> sorted() {
-		return ResponseEntity.status(200)
-			.body(appleService.sortApples());
-	}
-
-	@ApiOperation(value = "",
-		notes = ApiMetadata.SORTED_NOTES+ApiMetadata.FUNCTIONAL_JAVA,
-		response = ResponseEntity.class,
-		responseContainer = "List", tags = {})
-	@GetMapping(path = "/sortedJ8")
-	public ResponseEntity<List<Apple>> sortedJ8() {
-		return ResponseEntity.status(200)
-			.body(appleService.sortApplesJ8());
-	}
-
-	@ApiOperation(value = "",
-		notes =  ApiMetadata.FILTERED_NOTES+ApiMetadata.LEGACY_JAVA,
-		response = ResponseEntity.class,
-		responseContainer = "List", tags = {})
-	@GetMapping(path = "/filtered/{filterType}")
-	public ResponseEntity<List<Apple>> filtered(@PathVariable(value="filterType")
-		String filterType) {
+	@GetMapping(path = "/{filterType}")
+	public ResponseEntity<List<Apple>> filterApplesWithModernJava(
+		@PathVariable AppleFilterType filterType) {
 
 		return ResponseEntity.status(200)
-				.body(appleService.filterApples(filterType));
-	}
-
-	@ApiOperation(value = "", notes = ApiMetadata.FILTERED_NOTES
-			+ApiMetadata.FUNCTIONAL_JAVA,
-			response = ResponseEntity.class,
-			responseContainer = "List", tags = {})
-	@GetMapping(path = "/filteredJ8/{filterType}")
-	public ResponseEntity<List<Apple>> filteredJ8(@PathVariable
-		String filterType) {
-
-		return ResponseEntity.status(200)
-			.body(appleService.filterApplesJ8(filterType));
+			.body(appleService
+				.filterApplesWithModernJava(filterType));
 	}
 }
