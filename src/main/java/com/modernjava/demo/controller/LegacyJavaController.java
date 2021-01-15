@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/apples")
-public class LegacyJavaController {
+public class LegacyJavaController extends BaseController {
 
 	@Autowired
 	private AppleServiceLegacy appleService;
