@@ -1,11 +1,9 @@
 package com.modernjava.demo.service.impl;
 
-import static com.modernjava.demo.model.AppleFilterType.BYCOLOR;
-import static com.modernjava.demo.model.AppleFilterType.BYWEIGHT;
-import static com.modernjava.demo.model.AppleFilterType.SORT;
 import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
+import static com.modernjava.demo.model.AppleFilterType.*;
+import static com.modernjava.demo.util.AppleUtil.addApples;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
@@ -63,17 +61,6 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 		filters.put(BYCOLOR, byColorFn);
 
 		logger.info("Added {} filters", filters.size());
-	}
-
-	/*
-	 * Toy data... how do you like them apples!
-	 */
-	private static List<Apple> addApples() {
-		return Arrays.asList(
-			new Apple(AppleColor.GREEN, 188.1),
-			new Apple(AppleColor.GREEN, 132.3),
-			new Apple(AppleColor.RED, 156.7)
-		);
 	}
 
 	/* 

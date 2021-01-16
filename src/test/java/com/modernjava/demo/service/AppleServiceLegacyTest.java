@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
 import com.modernjava.demo.service.impl.AppleServiceLegacyImpl;
+import com.modernjava.demo.util.AppleUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AppleServiceLegacyImpl.class)
@@ -30,7 +31,7 @@ class AppleServiceLegacyTest {
 		List<Apple> expectOrderByWeight = appleService.sortApples();
 
 		assertTrue("Fail on apples not ordered by Weight",
-			isOrderedByWeight(expectOrderByWeight));
+			AppleUtil.isOrderedByWeight(expectOrderByWeight));
 	}
 
 	@Test
@@ -38,7 +39,7 @@ class AppleServiceLegacyTest {
 		List<Apple> expectOrderByWeight = appleService.sortApplesJ8();
 
 		assertTrue("Fail on apples not ordered by Weight",
-			isOrderedByWeight(expectOrderByWeight));
+			AppleUtil.isOrderedByWeight(expectOrderByWeight));
 	}
 
 	@Test
@@ -84,17 +85,4 @@ class AppleServiceLegacyTest {
 
 		assertFalse("Fail on heavy apples exists", heavyAppleExists);
 	}
-
-	private Boolean isOrderedByWeight(List<Apple> apples) {
-		Boolean isOrdered = true;
-		for(int i=0; i<apples.size()-1; i++) {
-			if(apples.get(i).getWeight()
-				> apples.get(i+1).getWeight()) {
-					isOrdered = false;
-					break;
-			}
-		}
-		return isOrdered;
-	}
-
 }

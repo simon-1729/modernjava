@@ -16,9 +16,11 @@ public class AppleExceptionControllerAdvice {
 
 	@ExceptionHandler(ConversionFailedException.class)
 	public ResponseEntity<AppleExceptionDetails> 
-	handlesAllException(HttpServletRequest request, ConversionFailedException e) {
+	handlesConversionException(HttpServletRequest request,
+			ConversionFailedException e) {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-			.body(new AppleExceptionDetails(request.getRequestURI(), e.toString()));
+			.body(new AppleExceptionDetails(
+				request.getRequestURI(), e.toString()));
 	}
 }
