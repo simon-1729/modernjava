@@ -1,14 +1,15 @@
 package com.modernjava.demo.service.impl;
 
 import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
-import static com.modernjava.demo.model.AppleFilterType.*;
+import static com.modernjava.demo.model.AppleFilterType.BYCOLOR;
+import static com.modernjava.demo.model.AppleFilterType.BYWEIGHT;
+import static com.modernjava.demo.model.AppleFilterType.SORT;
 import static com.modernjava.demo.util.AppleUtil.addApples;
 
 import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 		.getLogger(AppleServiceModernImpl.class);
 
 	private static final 
-		Map<AppleFilterType, Function<List<Apple>, List<Apple>>>
+		Map<AppleFilterType, UnaryOperator<List<Apple>>>
 			filters = new EnumMap<>(AppleFilterType.class);
 
 	/*
