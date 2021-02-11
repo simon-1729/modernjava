@@ -44,7 +44,7 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 	 * Filter Apples by weight.
 	 */
 	private final UnaryOperator<List<Apple>> byWeightFn =
-		(List<Apple> apples) -> apples.stream()
+		apples -> apples.stream()
 			.filter(a -> a.getWeight() < HEAVY_APPLE)
 			.collect(Collectors.toList());
 
@@ -52,7 +52,7 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 	 * Filter Apples by color.
 	 */
 	private final UnaryOperator<List<Apple>> byColorFn =
-		(List<Apple> apples) -> apples.stream()
+		apples -> apples.stream()
 			.filter(a -> AppleColor.GREEN.equals(a.getColor()))
 			.collect(Collectors.toList());
 
