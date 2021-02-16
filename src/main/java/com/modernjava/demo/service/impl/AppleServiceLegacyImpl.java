@@ -110,7 +110,7 @@ public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 
 		if (filterType.equalsIgnoreCase("byColor")) {
 			return filterApplesJ8Helper(
-				(Apple a) -> AppleColor.GREEN.equals
+				a -> AppleColor.GREEN.equals
 					(a.getColor()), apples);
 		/*
 		 * An even better alternative is to use the Streams API and
