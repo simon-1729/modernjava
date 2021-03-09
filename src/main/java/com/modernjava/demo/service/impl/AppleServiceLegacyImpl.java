@@ -1,7 +1,6 @@
 package com.modernjava.demo.service.impl;
 
 import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
-import static com.modernjava.demo.util.AppleUtil.addApples;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,26 +11,28 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
+import com.modernjava.demo.repository.AppleRepository;
 import com.modernjava.demo.service.AppleServiceLegacy;
 
 @Service
 public class AppleServiceLegacyImpl implements AppleServiceLegacy {
+	@Autowired
+	private AppleRepository appleRepository;
 
 	private static final Logger logger = LoggerFactory
 		.getLogger(AppleServiceLegacyImpl.class);
-
 
 	/*
 	 * Old school java, using an anonymous class to
 	 * sort them apples.
 	 */
 	public List<Apple> sortApples() {
-		List<Apple> apples = addApples();
-
+		List<Apple> apples = appleRepository.findAll();
 		logger.info("BEFORE: {}", apples);
 
 		Collections.sort(apples, new Comparator<Apple>() {
@@ -49,7 +50,7 @@ public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 	 * From Java 8 List comes with a sort method.
 	 */
 	public List<Apple> sortApplesJ8() {
-		List<Apple> apples = addApples();
+		List<Apple> apples = appleRepository.findAll();
 		logger.info("BEFORE: {}", apples);
 
 		apples.sort(Comparator.comparing(Apple::getWeight));
@@ -75,7 +76,7 @@ public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 	 * below.
 	 */
 	private List<Apple> filterApplesByColor(AppleColor appleColor) {
-		List<Apple> apples = addApples();
+		List<Apple> apples = appleRepository.findAll();
 		List<Apple> result = new ArrayList<>();
 
 		for(Apple apple: apples) {
@@ -88,7 +89,7 @@ public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 	}
 
 	private List<Apple> filterApplesByWeight() {
-		List<Apple> apples = addApples();
+		List<Apple> apples = appleRepository.findAll();
 		List<Apple> result = new ArrayList<>();
 
 		for(Apple apple: apples) {
@@ -106,7 +107,7 @@ public class AppleServiceLegacyImpl implements AppleServiceLegacy {
 	 * the filterApplesJ8Helper
 	 */
 	public List<Apple> filterApplesJ8(String filterType) {
-		List<Apple> apples = addApples();
+		List<Apple> apples = appleRepository.findAll();
 
 		if (filterType.equalsIgnoreCase("byColor")) {
 			return filterApplesJ8Helper(
