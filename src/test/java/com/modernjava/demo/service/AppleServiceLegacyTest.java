@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.modernjava.demo.ModernjavaApplication;
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
-import com.modernjava.demo.service.impl.AppleServiceLegacyImpl;
 import com.modernjava.demo.util.AppleUtil;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppleServiceLegacyImpl.class)
+@SpringBootTest(classes = ModernjavaApplication.class)
 class AppleServiceLegacyTest {
 	private final String BY_WEIGHT = "byWeight";
 	private final String BY_COLOR = "byColor";

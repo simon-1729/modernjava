@@ -1,7 +1,9 @@
 package com.modernjava.demo.service;
 
 import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
-import static com.modernjava.demo.model.AppleFilterType.*;
+import static com.modernjava.demo.model.AppleFilterType.BYCOLOR;
+import static com.modernjava.demo.model.AppleFilterType.BYWEIGHT;
+import static com.modernjava.demo.model.AppleFilterType.SORT;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -13,13 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.modernjava.demo.ModernjavaApplication;
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
-import com.modernjava.demo.service.impl.AppleServiceModernImpl;
 import com.modernjava.demo.util.AppleUtil;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppleServiceModernImpl.class)
+@SpringBootTest(classes = ModernjavaApplication.class)
 class AppleServiceModernTest {
 
 	@Autowired

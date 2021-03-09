@@ -4,7 +4,6 @@ import static com.modernjava.demo.model.Apple.HEAVY_APPLE;
 import static com.modernjava.demo.model.AppleFilterType.BYCOLOR;
 import static com.modernjava.demo.model.AppleFilterType.BYWEIGHT;
 import static com.modernjava.demo.model.AppleFilterType.SORT;
-import static com.modernjava.demo.util.AppleUtil.addApples;
 
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -15,15 +14,19 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.modernjava.demo.model.Apple;
 import com.modernjava.demo.model.AppleColor;
 import com.modernjava.demo.model.AppleFilterType;
+import com.modernjava.demo.repository.AppleRepository;
 import com.modernjava.demo.service.AppleServiceModern;
 
 @Service
 public class AppleServiceModernImpl implements AppleServiceModern {
+	@Autowired
+	private AppleRepository appleRepository;
 
 	private static final Logger logger = LoggerFactory
 		.getLogger(AppleServiceModernImpl.class);
@@ -70,6 +73,6 @@ public class AppleServiceModernImpl implements AppleServiceModern {
 	 */
 	public List<Apple> 
 		filterApplesWithModernJava(AppleFilterType filterType) {
-			return filters.get(filterType).apply(addApples());
+			return filters.get(filterType).apply(appleRepository.findAll());
 	}
 }
