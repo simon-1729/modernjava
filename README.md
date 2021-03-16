@@ -14,3 +14,8 @@ mvn spring-boot:run
 ```bash
 http://localhost:8888/swagger-ui.html
 ```
+
+#### H2 Console
+```bash
+http://localhost:8888/h2-console
+```
