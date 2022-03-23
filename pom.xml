@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.modernjava</groupId>
 	<artifactId>modernjava</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>modernjava</name>
 	<description>Demo modern java language programming concepts</description>
 
@@ -85,6 +85,12 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>3.7.0.1746</version>
 				</plugin>
+				
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				
 			</plugins>
 		</pluginManagement>
 	</build>
