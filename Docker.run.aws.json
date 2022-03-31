@@ -1,0 +1,14 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "simon1729/modernjava2",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8888,
+      "HostPort": 8888
+    }
+  ],
+  "Logging": "/opt/log/modernjava"
+}
