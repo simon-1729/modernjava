@@ -1,10 +1,8 @@
 # Modern Java
 
 #### Details
-This is a template project set up demonstrate some of the key difference between old school Java and the newer more functional java 8.
-In particular the Stream API and functional interfaces are touched on. The project may be built with maven and uses Spring to provide a REST API.
-Which in turn can be use to trigger various different sorting and filtering behaviour on a very humble dataset of apples.
-
+This is a demo project used to highlight some of the key features of java 8. In particular the Stream API and functional interfaces are touched on.
+The project leverages Spring and Swagger to provide a simple RESTful API which may be use to sort and filter the baked-in Apple dataset.
 
 #### Build source code
 ```bash
