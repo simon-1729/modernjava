@@ -3,7 +3,7 @@
 #### Details
 This is a demo project used to highlight some of the key features of java 8. In particular, we focus on the Stream API and functional interfaces.
 The project leverages Spring and Swagger to provide a simple RESTful API which may be use to sort and filter the baked-in Apple dataset.
-For completeness we have included both the Legacy and the Modern implementations.
+For comparison we have included both Legacy and Modern implementations.
 
 #### Build source code
 ```bash
